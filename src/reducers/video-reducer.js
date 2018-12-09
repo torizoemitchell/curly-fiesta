@@ -1,6 +1,7 @@
 
 const initialState = {
-  processing: false
+  processing: false,
+  toggleTeaser: false
 }
 
 export default (state = initialState, action) => {
@@ -19,6 +20,10 @@ export default (state = initialState, action) => {
       return {
         processing: false,
         error: action.payload.error,
+      }
+    case 'TOGGLE_TEASER':
+      return {
+        toggleTeaser: !state.toggleTeaser
       }
     default:
       return state

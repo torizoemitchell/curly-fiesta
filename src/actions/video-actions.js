@@ -27,3 +27,13 @@ export const getVideoFailure = (error) => {
     })
   }
 }
+
+
+export const toggleTeaser = () => {
+  console.log("action: toggleTeaser")
+  return (dispatch) => {
+    dispatch({
+      type: 'TOGGLE_TEASER',
+    })
+  }
+}

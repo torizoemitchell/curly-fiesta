@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getVideoRequest} from './actions/video-actions'
-import './App.css';
+import { getVideoRequest } from './actions/video-actions'
+import './App.css'
+import { Tile } from './components/tile'
 
 class App extends Component {
+
   componentDidMount () {
     this.props.getVideoRequest()
   }
@@ -16,6 +18,10 @@ class App extends Component {
     const videoError = video && video.error
 
     console.log('App Render') // please leave this log statement
+    console.log('VideoData: ', videoData)
+    console.log("props", props)
+    // const { tileArt, durationSeconds, seasonNum, episodeNum, seriesName, teaser, title } = props.video.data
+    // console.log("props.video.data", props.video.data)
 
     return (
       <div className="app">
@@ -23,7 +29,9 @@ class App extends Component {
           <h1 className="app__main-heading">{`Hello!  This is the <App /> component!  Please render your tile component in .app__body below`}</h1>
         </header>
         <div className="app__body">
-          {/* TODO: <Tile /> component here */}
+
+          {videoData ? <Tile props={props.video.data}/> : "Loading..."}
+
         </div>
       </div>
     );

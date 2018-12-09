@@ -1,0 +1,16 @@
+
+.tile {
+  width: 420px;
+  background-color: white;
+  color: black;
+}
+.image{
+  width: 420px;
+}
+.info-section{
+  text-align: left;
+  padding: 15px;
+}
+.series-name{
+  font-weight: bold;
+}
