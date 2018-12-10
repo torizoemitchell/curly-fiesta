@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getVideoRequest } from './actions/video-actions'
 import './App.css'
-import { Tile } from './components/tile'
+import { Tile } from './components/tile.js'
 
 class App extends Component {
 
