@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { toggleTeaser } from '../actions/video-actions'
+import { bindActionCreators } from 'redux'
 import { Row, Button } from 'react-materialize'
 import './tile.css'
 
@@ -18,6 +19,11 @@ export class Tile extends React.Component{
     let sOrNoS = ''
     mins === 1 ? sOrNoS = 'min' : sOrNoS = 'mins'
     return `${mins} ${sOrNoS}`
+  }
+
+  toggleTeaserCB = () =>{
+    const { toggleTeaser } = this.props
+    // toggleTeaser()
   }
 
   render(){
@@ -40,7 +46,7 @@ export class Tile extends React.Component{
               <Button floating small waves='light' icon='play_arrow'/>
             </div>
             <div>
-              <Button floating small className='blue-grey darken-2' waves='light' icon='more_horiz' onClick={this.props.toggleTeaser()}
+              <Button floating small className='blue-grey darken-2' waves='light' icon='more_horiz' onClick={this.toggleTeaserCB()}
               />
             </div>
           </div>
@@ -63,10 +69,7 @@ const mapStateToProps = (state) => {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    toggleTeaser: () => dispatch(toggleTeaser()),
-  }
-}
+const mapDispatchToProps = (dispatch) => bindActionCreators({ toggleTeaser }, dispatch)
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(Tile);
