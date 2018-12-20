@@ -1,11 +1,10 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { toggleTeaser } from '../actions/video-actions'
-import { bindActionCreators } from 'redux'
 import { Row, Button } from 'react-materialize'
 import './tile.css'
 
-export class Tile extends React.Component{
+class Tile extends React.Component{
 
   formatHrs = (totalSeconds) => {
     const hrs = Math.floor(((totalSeconds/60)/60))
@@ -34,19 +33,21 @@ export class Tile extends React.Component{
       seriesName,
       seasonNum,
       episodeNum,
-      durationSeconds
-    } = this.props.props
-    console.log("this.props:", this.props)
+      durationSeconds,
+    } = this.props.video.data
+    const {showingTeaser} = this.props.video
+    // console.log("this.props.video.data:", this.props.video.data)
+    // console.log("this.props: ", this.props)
     return(
       <div className='tile container'>
         <div className='art'>
           <Row><img className='image' src={tileArt} alt="episode"/></Row>
         <div className='action-buttons'>
             <div>
-              <Button floating small waves='light' icon='play_arrow'/>
+              <Button floating waves='light' icon='play_arrow'/>
             </div>
             <div>
-              <Button floating small className='blue-grey darken-2' waves='light' icon='more_horiz' onClick={this.toggleTeaserCB()}
+              <Button floating className='blue-grey darken-2' waves='light' icon='more_horiz' onClick={(e)=>{e.preventDefault(); this.props.toggleTeaser()}}
               />
             </div>
           </div>
@@ -54,7 +55,7 @@ export class Tile extends React.Component{
         <div className='info-section'>
           <Row className='series-name'><span>{seriesName}</span></Row>
           <Row><span>{title}</span></Row>
-          <Row><span>{teaser}</span></Row>
+          {showingTeaser ? <Row><span>{teaser}</span></Row> : ''}
           <Row><span>S{seasonNum}:Ep{episodeNum} | {this.formatHrs(durationSeconds)} {this.formatMins(durationSeconds)}</span></Row>
         </div>
       </div>
@@ -64,12 +65,16 @@ export class Tile extends React.Component{
 }
 
 const mapStateToProps = (state) => {
+  console.log("*** Tile::mapStateToProps(), state: ", state);
   return {
-    showingTeaser: state.showingTeaser
+    video: state.video,
   }
 }
 
-const mapDispatchToProps = (dispatch) => bindActionCreators({ toggleTeaser }, dispatch)
-
+const mapDispatchToProps = (dispatch) => {
+  return {
+    toggleTeaser: () => dispatch(toggleTeaser()),
+  }
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(Tile);

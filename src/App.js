@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import { getVideoRequest } from './actions/video-actions'
 import './App.css'
-import { Tile } from './components/tile.js'
+import Tile from './components/tile.js'
 
 class App extends Component {
 
@@ -11,6 +11,7 @@ class App extends Component {
   }
 
   render() {
+    //this.props.video from state from mapStateToProps
     const { props } = this
     const { video = {} } = props
     const videoData = video && video.data
@@ -20,8 +21,7 @@ class App extends Component {
     console.log('App Render') // please leave this log statement
     console.log('VideoData: ', videoData)
     console.log("props", props)
-    // const { tileArt, durationSeconds, seasonNum, episodeNum, seriesName, teaser, title } = props.video.data
-    // console.log("props.video.data", props.video.data)
+
 
     return (
       <div className="app">
@@ -30,7 +30,7 @@ class App extends Component {
         </header>
         <div className="app__body">
 
-          {videoData ? <Tile props={props.video.data}/> : "Loading..."}
+          {videoData ? <Tile/> : "Loading..."}
 
         </div>
       </div>
